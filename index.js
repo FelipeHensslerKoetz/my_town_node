@@ -5,6 +5,8 @@ const Role = require('./Role');
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
+const Reaction = require('./Reaction');
+const Project = require('./Project'); 
 
 // Drop do banco a cada start
 sequelize.sync({ force: true }).then(async () => {
@@ -124,7 +126,6 @@ app.use((err, req, res, next) => {
         path: req.originalUrl
     })
 });
-
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
