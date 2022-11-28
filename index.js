@@ -3,6 +3,8 @@ const sequelize = require('./database');
 const app = express();
 const Role = require('./Role');
 const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 
 // Drop do banco a cada start
 sequelize.sync({ force: true }).then(async () => {
