@@ -29,14 +29,14 @@ router.post('/users',
         }
 
         await UserService.create(req.body);
-        res.send('User was inserted');
-    })
+        res.send({message: req.t('user_create_success')});
+    });
 
 router.get('/users', pagination, async (req, res) => {
     const page = await UserService.getUsers(req.pagination);
 
     res.send(page);
-})
+});
 
 router.get('/users/:id', idNumberControl, async (req, res, next) => {
     try {
