@@ -19,6 +19,7 @@
   "homepage": "https://github.com/FelipeHensslerKoetz/my_town_node#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-validator": "^6.14.2",
     "sequelize": "^6.25.8",
     "sqlite3": "^5.1.2"
   },

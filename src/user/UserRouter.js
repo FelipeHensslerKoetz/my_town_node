@@ -3,9 +3,32 @@ const router = express.Router();
 const pagination = require('../shared/pagination');
 const idNumberControl = require('../shared/idNumberControl');
 const UserService = require('./UserService');
+const { body, validationResult } = require('express-validator');
+const ValidationException = require('../shared/ValidationException');
 
-router.post('/users', async (req, res) => {
-    await UserService.create(req.body)
+router.post('/users',
+    body('name')
+        .notEmpty().withMessage('Name cannot be blank.')
+        .bail()
+        .isLength({ min: 4, max: 32}).withMessage('Name has to be between 4 and 32 characters'),
+    body('email')
+        .notEmpty().isEmail().withMessage('Email muste be a valid address.')
+        .bail()
+        .custom(async (email) => {
+            const user = await UserService.findByEmail(email);
+            if(user) {
+                throw new Error('Email already exists.');
+            }
+        })
+    ,
+    async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return next(new ValidationException(errors.array()));
+    }
+
+    await UserService.create(req.body);
     res.send('User was inserted');
 })
 
