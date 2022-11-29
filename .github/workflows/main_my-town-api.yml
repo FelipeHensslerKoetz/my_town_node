@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'my-town-api'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F04290999A4E44FB9F31D78B256E680E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_79D967A670FF452AAD535D9AF910E10C }}
           package: .
