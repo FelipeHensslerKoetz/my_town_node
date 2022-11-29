@@ -10,27 +10,27 @@ router.post('/users',
     body('name')
         .notEmpty().withMessage('Name cannot be blank.')
         .bail()
-        .isLength({ min: 4, max: 32}).withMessage('Name has to be between 4 and 32 characters'),
+        .isLength({ min: 4, max: 32 }).withMessage('Name has to be between 4 and 32 characters'),
     body('email')
         .notEmpty().isEmail().withMessage('Email muste be a valid address.')
         .bail()
         .custom(async (email) => {
             const user = await UserService.findByEmail(email);
-            if(user) {
+            if (user) {
                 throw new Error('Email already exists.');
             }
         })
     ,
     async (req, res, next) => {
-    const errors = validationResult(req);
+        const errors = validationResult(req);
 
-    if(!errors.isEmpty()){
-        return next(new ValidationException(errors.array()));
-    }
+        if (!errors.isEmpty()) {
+            return next(new ValidationException(errors.array()));
+        }
 
-    await UserService.create(req.body);
-    res.send('User was inserted');
-})
+        await UserService.create(req.body);
+        res.send('User was inserted');
+    })
 
 router.get('/users', pagination, async (req, res) => {
     const page = await UserService.getUsers(req.pagination);
