@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 
 const Post = require('./post/Post');
@@ -23,6 +24,7 @@ i18next.use(Backend).use(middleware.LanguageDetector)
 
 const app = express();
 
+app.use(cors());
 app.use(middleware.handle(i18next));
 app.use(express.json());
 app.use(UserRouter);

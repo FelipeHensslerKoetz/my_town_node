@@ -1,0 +1,10 @@
+{
+  "database": {
+    "db": "dev-db",
+    "userName": "dev-user",
+    "password": "dev-password",
+    "dialect": "sqlite",
+    "host": "./dev.sqlite",
+    "logging": true
+  }
+}
